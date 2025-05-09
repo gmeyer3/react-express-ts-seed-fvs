@@ -29,7 +29,7 @@ const App: React.FC = () => {
 
   const header = (
     <div className="flex align-items-center justify-content-center">
-      <h2 className="m-0">Hello World App</h2>
+      <h2 className="m-4">Hello World App</h2>
     </div>
   );
 
