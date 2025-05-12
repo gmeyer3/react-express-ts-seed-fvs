@@ -4,6 +4,23 @@ import { Button } from 'primereact/button';
 import { Message } from 'primereact/message';
 import axios from 'axios';
 
+// Configure axios
+const api = axios.create({
+  baseURL: 'http://localhost:5001',
+  headers: {
+    'Content-Type': 'application/json'
+  }
+});
+
+// Add response interceptor to handle errors
+api.interceptors.response.use(
+  response => response,
+  error => {
+    console.error('API Error:', error.response || error);
+    throw error;
+  }
+);
+
 const App: React.FC = () => {
   const [message, setMessage] = useState<string>('');
   const [loading, setLoading] = useState<boolean>(true);
@@ -16,12 +33,12 @@ const App: React.FC = () => {
   const fetchMessage = async () => {
     try {
       setLoading(true);
-      const response = await axios.get('/api/hello');
+      const response = await api.get('/api/hello');
       setMessage(response.data.message);
       setError(null);
-    } catch (err) {
-      setError('Failed to fetch message from server');
-      console.error(err);
+    } catch (err: any) {
+      setError(err.response?.data?.message || 'Failed to fetch message from server');
+      console.error('Fetch error:', err);
     } finally {
       setLoading(false);
     }
