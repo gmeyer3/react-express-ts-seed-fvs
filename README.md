@@ -33,11 +33,40 @@ This will start:
 
 Use Ctrl+C to stop both servers.
 
+## Utility Scripts
+
+### restart.sh
+
+A utility script for restarting the application with a clean environment:
+```bash
+./restart.sh
+```
+
+This script:
+- Stops all running Node.js processes
+- Clears the npm cache
+- Restarts the application
+
+Make sure to make it executable first with `chmod +x restart.sh`
+
+## API Endpoints
+
+- `/api/hello` - Returns a JSON message and timestamp
+- `/test` - Returns server status
+
+## CORS Configuration
+
+The server is configured with CORS to allow requests from the React application:
+- Origin: http://localhost:3000
+- Allowed Methods: GET, POST, PUT, DELETE, OPTIONS
+- Allowed Headers: Content-Type, Accept, Authorization, X-Requested-With, Cache-Control
+
 ## Project Structure
 
 ```
 ├── client/             # React frontend
 ├── server/             # Express backend
 ├── package.json        # Root package.json
-└── README.md          # This file
+├── restart.sh          # Utility script for restarting the application
+└── README.md           # This file
 ```
