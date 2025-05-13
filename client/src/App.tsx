@@ -46,7 +46,7 @@ const App: React.FC = () => {
 
   const header = (
     <div className="flex align-items-center justify-content-center">
-      <h2 className="m-4">Hello World App</h2>
+      <h2 className="m-4">Simple Test App</h2>
     </div>
   );
 
@@ -75,7 +75,7 @@ const App: React.FC = () => {
             ) : (
               <div className="text-center p-4">
                 <h3>{message}</h3>
-                <p>Welcome to your TypeScript React + Express application with PrimeReact UI!</p>
+                <p>Welcome? to your TypeScript React + Express application with PrimeReact UI!</p>
               </div>
             )}
           </Card>

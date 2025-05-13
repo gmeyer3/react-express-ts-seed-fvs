@@ -16,7 +16,7 @@ app.use(express.json());
 
 // API Routes
 app.get('/api/hello', (req: Request, res: Response) => {
-  res.json({ message: 'Hello from Express TypeScript Server!' });
+  res.json({ message: 'Hello... from Express TypeScript Server!?' });
 });
 
 // Serve static assets in production
