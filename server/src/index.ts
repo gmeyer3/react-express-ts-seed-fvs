@@ -42,7 +42,7 @@ app.get('/api/hello', (req: Request, res: Response) => {
   try {
     const currentTime = new Date().toISOString();
     const responseData = { 
-      message: '*?? UPDATED MESSAGE FROM SERVER - FIX APPLIED ***',
+      message: 'Welcome to the demo! Please follow the instructions in the README.md file to get started.',
       timestamp: Date.now()
     };
     

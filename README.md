@@ -33,6 +33,17 @@ This will start:
 
 Use Ctrl+C to stop both servers.
 
+## Features
+
+- **TypeScript** - Fully typed codebase for both frontend and backend
+- **React** - Modern React with hooks for the frontend
+- **Express** - Fast and minimalist web framework for the backend
+- **PrimeReact** - UI component library for React applications
+- **Single API Call** - Frontend makes a single API call on load with manual refresh option
+- **Comprehensive Error Handling** - Both client and server implement proper error handling
+- **Debug Information** - Debug details available in the frontend for API responses
+- **Production-Ready Configuration** - Includes setups for both development and production environments
+
 ## Utility Scripts
 
 ### restart.sh
@@ -51,7 +62,7 @@ Make sure to make it executable first with `chmod +x restart.sh`
 
 ## API Endpoints
 
-- `/api/hello` - Returns a JSON message and timestamp
+- `/api/hello` - Returns a welcome message and timestamp
 - `/test` - Returns server status
 
 ## CORS Configuration
@@ -61,12 +72,25 @@ The server is configured with CORS to allow requests from the React application:
 - Allowed Methods: GET, POST, PUT, DELETE, OPTIONS
 - Allowed Headers: Content-Type, Accept, Authorization, X-Requested-With, Cache-Control
 
+## Build
+
+To build the application for production:
+
+```bash
+npm run build
+```
+
+This will create optimized builds for both the client and server.
+
 ## Project Structure
 
 ```
-├── client/             # React frontend
+├── client/             # React frontend with PrimeReact UI components
+│   ├── public/         # Static assets
+│   └── src/            # React source code
 ├── server/             # Express backend
-├── package.json        # Root package.json
+│   └── src/            # TypeScript source code
+├── package.json        # Root package.json with scripts
 ├── restart.sh          # Utility script for restarting the application
 └── README.md           # This file
 ```

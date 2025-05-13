@@ -74,24 +74,10 @@ const App: React.FC = () => {
     }
   };
 
-  // Initial fetch
+  // Initial fetch only
   useEffect(() => {
     console.log('Component mounted - Making initial API call');
     fetchMessage();
-  }, []);
-
-  // Auto-refresh every 5 seconds instead of 2 to reduce console noise
-  useEffect(() => {
-    console.log('Setting up refresh interval');
-    const interval = setInterval(() => {
-      console.log('Interval triggered - Making API call');
-      fetchMessage();
-    }, 5000);
-    
-    return () => {
-      console.log('Cleaning up interval');
-      clearInterval(interval);
-    };
   }, []);
 
   const header = (
@@ -126,11 +112,11 @@ const App: React.FC = () => {
             ) : (
               <div className="text-center p-4">
                 <h3>{message}</h3>
-                {debugInfo && (
+                {/*debugInfo && (
                   <div className="mt-3 p-2 border-1 surface-border border-round overflow-auto" style={{ maxHeight: '200px', fontSize: '0.8rem' }}>
                     <pre style={{ whiteSpace: 'pre-wrap' }}>{debugInfo}</pre>
                   </div>
-                )}
+                )*/}
               </div>
             )}
           </Card>
