@@ -33,6 +33,26 @@ This will start:
 
 Use Ctrl+C to stop both servers.
 
+## Windows-Specific Instructions
+
+If you're running on Windows 11:
+
+1. Make sure to run PowerShell or Command Prompt as Administrator
+2. If you encounter port conflicts:
+   ```bash
+   # Check if ports are in use
+   netstat -ano | findstr :3000
+   netstat -ano | findstr :5001
+   
+   # Kill process using a port (replace PID with the process ID)
+   taskkill /F /PID <PID>
+   ```
+3. If you get permission errors, try:
+   ```bash
+   # Allow Node.js through Windows Firewall
+   netsh advfirewall firewall add rule name="Node.js" dir=in action=allow program="C:\Program Files\nodejs\node.exe" enable=yes
+   ```
+
 ## Features
 
 - **TypeScript** - Fully typed codebase for both frontend and backend
@@ -127,6 +147,16 @@ If you encounter any issues:
 4. Clear your browser cache
 5. Check the server console for request logs
 6. Verify CORS settings if you're getting cross-origin errors
+7. On Windows:
+   - Run terminal as Administrator
+   - Check Windows Firewall settings
+   - Ensure no antivirus is blocking Node.js
+   - Try using `127.0.0.1` instead of `localhost`
+8. If the server times out:
+   - Check your network settings
+   - Verify no proxy is interfering
+   - Try increasing the timeout in server/src/index.ts
+   - Check Windows Defender Firewall settings
 
 ## License
 

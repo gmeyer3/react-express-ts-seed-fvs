@@ -4,7 +4,15 @@ import path from 'path';
 
 // Initialize express app
 const app = express();
-const PORT = process.env.PORT || 5001;
+const PORT = parseInt(process.env.PORT || '5001', 10);
+const HOST = process.env.HOST || '0.0.0.0'; // Allow connections from any IP
+
+// Increase timeout settings
+app.use((req: Request, res: Response, next: NextFunction) => {
+  req.setTimeout(30000); // 30 seconds
+  res.setTimeout(30000); // 30 seconds
+  next();
+});
 
 // Request logging middleware
 app.use((req: Request, res: Response, next: NextFunction) => {
@@ -15,16 +23,18 @@ app.use((req: Request, res: Response, next: NextFunction) => {
 
 // CORS configuration - Allow all origins in development
 app.use(cors({
-  origin: 'http://localhost:3000', // React app address
+  origin: ['http://localhost:3000', 'http://127.0.0.1:3000'], // Allow both localhost and 127.0.0.1
   methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
-  allowedHeaders: ['Content-Type', 'Accept', 'Authorization', 'X-Requested-With', 'Cache-Control']
+  allowedHeaders: ['Content-Type', 'Accept', 'Authorization', 'X-Requested-With', 'Cache-Control'],
+  credentials: true
 }));
 
 // Add CORS preflight handling
 app.options('*', cors());
 
-// Parse JSON bodies
-app.use(express.json());
+// Parse JSON bodies with increased limit
+app.use(express.json({ limit: '50mb' }));
+app.use(express.urlencoded({ extended: true, limit: '50mb' }));
 
 // Serve static files from the React app in development
 if (process.env.NODE_ENV !== 'production') {
@@ -50,7 +60,7 @@ app.get('/api/hello', (req: Request, res: Response) => {
     
     // Set explicit headers for CORS
     res.setHeader('Content-Type', 'application/json');
-    res.setHeader('Access-Control-Allow-Origin', 'http://localhost:3000');
+    res.setHeader('Access-Control-Allow-Origin', req.headers.origin || 'http://localhost:3000');
     res.setHeader('Access-Control-Allow-Methods', 'GET, POST, OPTIONS');
     res.setHeader('Access-Control-Allow-Headers', 'Content-Type, Accept, Cache-Control');
     res.setHeader('Cache-Control', 'no-store, no-cache, must-revalidate, proxy-revalidate');
@@ -80,8 +90,20 @@ if (process.env.NODE_ENV === 'production') {
   });
 }
 
-// Start server
-app.listen(PORT, () => {
-  console.log(`Server running on port ${PORT}`);
+// Start server with proper error handling
+const server = app.listen(PORT, HOST, () => {
+  console.log(`Server running on http://${HOST}:${PORT}`);
   console.log(`Test the API with: curl http://localhost:${PORT}/api/hello`);
+}).on('error', (err: Error) => {
+  console.error('Server failed to start:', err);
+  process.exit(1);
+});
+
+// Handle server shutdown gracefully
+process.on('SIGTERM', () => {
+  console.log('SIGTERM signal received: closing HTTP server');
+  server.close(() => {
+    console.log('HTTP server closed');
+    process.exit(0);
+  });
 }); 
