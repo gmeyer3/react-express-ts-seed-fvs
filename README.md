@@ -23,24 +23,19 @@ npm run install-all
 ## Development
 
 To run both frontend and backend in development mode:
-
-### For Windows:
-```bash
-npm run start:win
-```
-
-### For other operating systems:
 ```bash
 npm run start
 ```
 
 This will start:
-- Frontend: React development server on http://127.0.0.1:3000
-- Backend: Express server on http://127.0.0.1:5001
+- Frontend: React development server on http://localhost:3000
+- Backend: Express server on http://localhost:5001
 
 Use Ctrl+C to stop both servers.
 
-## Windows-Specific Instructions
+## Platform-Specific Instructions
+
+### Windows
 
 If you're running on Windows 11:
 
@@ -62,9 +57,31 @@ If you're running on Windows 11:
 4. If the frontend times out:
    - Use `http://127.0.0.1:3000` instead of `localhost:3000`
    - Clear your browser cache
-   - Try running `npm run start:win` instead of `npm run start`
    - Check Windows Defender Firewall settings
    - Ensure no antivirus is blocking Node.js
+
+### macOS
+
+If you're running on macOS:
+
+1. If you encounter port conflicts:
+   ```bash
+   # Check if ports are in use
+   lsof -i :3000
+   lsof -i :5001
+   
+   # Kill process using a port (replace PID with the process ID)
+   kill -9 <PID>
+   ```
+2. If you get permission errors:
+   ```bash
+   # Fix permissions
+   sudo chown -R $USER:$(id -gn $USER) .
+   ```
+3. If the frontend times out:
+   - Clear your browser cache
+   - Check your hosts file: `sudo nano /etc/hosts`
+   - Ensure localhost is properly configured
 
 ## Features
 
