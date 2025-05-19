@@ -40,7 +40,6 @@ const App: React.FC = () => {
       setData(result);
       setLastUpdate(new Date().toLocaleTimeString());
     } catch (err) {
-      console.error('Error fetching data:', err);
       setError(err instanceof Error ? err.message : 'Failed to fetch data');
     } finally {
       setLoading(false);
