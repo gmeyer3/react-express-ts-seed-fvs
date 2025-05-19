@@ -22,9 +22,13 @@ npm run install-all
 
 ## Development
 
-To run both frontend and backend in development mode:
+To run both frontend and backend in development mode (Mac/Linux):
 ```bash
 npm run start
+```
+To run both frontend and backend in development mode (Windows):
+```bash
+npm run start:win
 ```
 
 This will start:
