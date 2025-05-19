@@ -4,9 +4,11 @@
   "description": "Full-stack TypeScript application with React and Express",
   "main": "index.js",
   "scripts": {
-    "start": "concurrently --kill-others-on-fail --handle-input \"npm run server\" \"npm run client\"",
+    "start": "concurrently --kill-others-on-fail --handle-input \"npm run server\" \"npm run client:win\"",
+    "start:win": "concurrently --kill-others-on-fail --handle-input \"npm run server\" \"cd client && npm run start:win\"",
     "server": "cd server && npm run dev",
     "client": "cd client && npm start",
+    "client:win": "cd client && npm run start:win",
     "install-all": "npm install && cd client && npm install && cd ../server && npm install",
     "build": "cd client && npm run build && cd ../server && npm run build",
     "clean": "rm -rf node_modules && cd client && rm -rf node_modules && cd ../server && rm -rf node_modules"
