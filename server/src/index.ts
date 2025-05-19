@@ -1,6 +1,7 @@
 import express, { Request, Response, NextFunction } from 'express';
 import cors from 'cors';
 import path from 'path';
+import fs from 'fs';
 
 // Initialize express app
 const app = express();
@@ -73,6 +74,34 @@ app.get('/api/hello', (req: Request, res: Response) => {
   } catch (error) {
     console.error('Error in /api/hello:', error);
     res.status(500).json({ error: 'Internal server error' });
+  }
+});
+
+// New route for table1 data
+app.get('/api/table1', (req: Request, res: Response) => {
+  try {
+    const filePath = path.join(__dirname, 'table1.json');
+    const fileContent = fs.readFileSync(filePath, 'utf-8');
+    const data = JSON.parse(fileContent);
+    
+    // Set headers for CORS and caching
+    res.setHeader('Content-Type', 'application/json');
+    res.setHeader('Access-Control-Allow-Origin', 'http://localhost:3000');
+    res.setHeader('Access-Control-Allow-Methods', 'GET, OPTIONS');
+    res.setHeader('Access-Control-Allow-Headers', 'Content-Type, Accept, Cache-Control');
+    res.setHeader('Cache-Control', 'no-store, no-cache, must-revalidate, proxy-revalidate');
+    res.setHeader('Pragma', 'no-cache');
+    res.setHeader('Expires', '0');
+    
+    res.json(data);
+    
+    console.log('Table1 data sent successfully');
+  } catch (error) {
+    console.error('Error reading table1.json:', error);
+    res.status(500).json({ 
+      error: 'Failed to read table data',
+      details: error instanceof Error ? error.message : 'Unknown error'
+    });
   }
 });
 

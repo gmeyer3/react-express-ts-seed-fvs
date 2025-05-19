@@ -1,6 +1,12 @@
 # React Express TypeScript Seed Project
 
-A full-stack TypeScript application with React frontend and Express backend.
+A full-stack TypeScript application with React frontend and Express backend. This is the basis for simple feature requests/fixes.
+
+## DEVELOPMENT TASKS FOR SOC
+
+- Install and run the development mode for this project (instructions below this set of bullets)
+- The existing Prime React component in the default screen doesn't have sorting. Please establish sorting by all the headers with ascending/descending clickable icons
+- After the above 'fix' is completed, there is a 'task2.json' file within the server back end files. Give it a back end route and GET request by which to be called from a new front end route that contains a Prime React route/page that displays the data in a Prime React table.
 
 ## Prerequisites
 
