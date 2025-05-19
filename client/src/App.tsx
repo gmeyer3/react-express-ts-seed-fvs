@@ -54,13 +54,13 @@ const App: React.FC = () => {
 
   const header = (
     <div className="flex align-items-center justify-content-between">
-      <h2 className="m-0">User Data Table</h2>
+      <h2 className="m-3 p-3">User Data Table</h2>
       <Button 
         label="Refresh" 
         icon="pi pi-refresh" 
         onClick={fetchData} 
         loading={loading}
-        className="p-button-outlined"
+        className="p-button-outlined m-2"
       />
     </div>
   );
