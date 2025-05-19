@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "start": "concurrently --kill-others-on-fail --handle-input \"npm run server\" \"npm run client\"",
-    "start:win": "concurrently --kill-others-on-fail --handle-input \"npm run server\" \"cd client && set PORT=3000 && set HOST=127.0.0.1 && npm start\"",
+    "start:win": "concurrently --kill-others-on-fail --handle-input \"npm run server\" \"cd client && set HOST=127.0.0.1 && npm start\"",
     "server": "cd server && npm run dev",
     "client": "cd client && npm start",
     "install-all": "npm install && cd client && npm install && cd ../server && npm install",
