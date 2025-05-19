@@ -4,8 +4,8 @@ A full-stack TypeScript application with React frontend and Express backend.
 
 ## Prerequisites
 
-- Node.js (v14 or higher)
-- npm (v6 or higher)
+- Node.js (v16 or higher)
+- npm (v8 or higher)
 
 ## Installation
 
@@ -43,6 +43,8 @@ Use Ctrl+C to stop both servers.
 - **Comprehensive Error Handling** - Both client and server implement proper error handling
 - **Debug Information** - Debug details available in the frontend for API responses
 - **Production-Ready Configuration** - Includes setups for both development and production environments
+- **Request Logging** - Server logs all incoming requests with timestamps
+- **CORS Configuration** - Properly configured for development and production environments
 
 ## Utility Scripts
 
@@ -60,10 +62,20 @@ This script:
 
 Make sure to make it executable first with `chmod +x restart.sh`
 
+### Additional Scripts
+
+- `npm run clean` - Removes all node_modules directories
+- `npm run build` - Builds both client and server for production
+- `npm run server` - Runs only the server in development mode
+- `npm run client` - Runs only the client in development mode
+
 ## API Endpoints
 
 - `/api/hello` - Returns a welcome message and timestamp
+  - Response includes: message and timestamp
+  - Headers: Properly configured CORS and cache control
 - `/test` - Returns server status
+  - Simple endpoint to verify server is running
 
 ## CORS Configuration
 
@@ -71,6 +83,7 @@ The server is configured with CORS to allow requests from the React application:
 - Origin: http://localhost:3000
 - Allowed Methods: GET, POST, PUT, DELETE, OPTIONS
 - Allowed Headers: Content-Type, Accept, Authorization, X-Requested-With, Cache-Control
+- Cache Control: no-store, no-cache, must-revalidate
 
 ## Build
 
@@ -88,9 +101,33 @@ This will create optimized builds for both the client and server.
 ├── client/             # React frontend with PrimeReact UI components
 │   ├── public/         # Static assets
 │   └── src/            # React source code
+│       ├── components/ # React components
+│       ├── hooks/      # Custom React hooks
+│       ├── services/   # API services
+│       ├── App.tsx     # Main application component
+│       └── index.tsx   # Application entry point
 ├── server/             # Express backend
 │   └── src/            # TypeScript source code
+│       ├── controllers/# Route controllers
+│       ├── middleware/ # Express middleware
+│       ├── routes/     # API routes
+│       └── index.ts    # Server entry point
 ├── package.json        # Root package.json with scripts
 ├── restart.sh          # Utility script for restarting the application
 └── README.md           # This file
 ```
+
+## Troubleshooting
+
+If you encounter any issues:
+
+1. Make sure all dependencies are installed correctly
+2. Check that the ports 3000 and 5001 are not in use
+3. Try running the restart script: `./restart.sh`
+4. Clear your browser cache
+5. Check the server console for request logs
+6. Verify CORS settings if you're getting cross-origin errors
+
+## License
+
+ISC
